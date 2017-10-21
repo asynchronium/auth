@@ -1,0 +1,39 @@
+{
+  "name": "asynchronium-auth",
+  "version": "0.1.0",
+  "description": "Asynchronium auth service",
+  "keywords": [
+    "asynchronium",
+    "auth"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/asynchronium/auth",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asynchronium/auth"
+  },
+  "bugs": {
+    "url": "https://github.com/asynchronium/auth/issues",
+    "email": "broadsw.rd@yandex.ru"
+  },
+  "author": {
+    "name": "Vladimir Bykov",
+    "email": "broadsw.rd@yandex.ru",
+    "url": "https://github.com/broadsw0rd"
+  },
+  "main": "bin/run.js",
+  "devDependencies": {
+    "snazzy": "7.0.0",
+    "standard": "^10.0.3",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "commander": "^2.11.0",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0"
+  },
+  "scripts": {
+    "check": "standard lib/*.js | snazzy"
+  }
+}
