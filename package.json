@@ -34,6 +34,6 @@
     "jsonwebtoken": "^8.1.0"
   },
   "scripts": {
-    "check": "standard lib/*.js | snazzy"
+    "check": "standard bin/*.js routes/*.js | snazzy"
   }
 }
