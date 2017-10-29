@@ -1,14 +1,36 @@
 var express = require('express')
+var bodyParser = require('body-parser')
 
-function app (auth) {
+function router (auth) {
   var server = express()
 
-  server.post('/sign-in/', function signIn (req, res) {
+  server.use(bodyParser.urlencoded())
+  server.use(bodyParser.json())
 
+  server.post('/sign-up/', async function signUp (req, res) {
+    var email = req.body.email
+    var password = req.body.password
+
+    try {
+      var result = await auth.signUp({ email, password })
+    } catch (error) {
+      res
+        .status(400)
+        .json({ message: error.message })
+    }
   })
 
-  server.post('/sign-up/', function signUp (req, res) {
+  server.post('/sign-in/', async function signIn (req, res) {
+    var email = req.body.email
+    var password = req.body.password
 
+    try {
+      var result = await auth.signIn({ email, password })
+    } catch (error) {
+      res
+        .status(401)
+        .json({ message: error.message })
+    }
   })
 
   server.get('/confirm/:code/', function confirm (req, res) {
@@ -26,4 +48,4 @@ function app (auth) {
   return server
 }
 
-module.exports = app
+module.exports = router
