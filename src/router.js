@@ -2,12 +2,8 @@ var express = require('express')
 var bodyParser = require('body-parser')
 
 function router (auth) {
-  var server = express()
 
-  server.use(bodyParser.urlencoded())
-  server.use(bodyParser.json())
-
-  server.post('/sign-up/', async function signUp (req, res) {
+  async function signUp (req, res) {
     var email = req.body.email
     var password = req.body.password
 
@@ -18,9 +14,9 @@ function router (auth) {
         .status(400)
         .json({ message: error.message })
     }
-  })
+  }
 
-  server.post('/sign-in/', async function signIn (req, res) {
+  async function signIn (req, res) {
     var email = req.body.email
     var password = req.body.password
 
@@ -31,9 +27,9 @@ function router (auth) {
         .status(401)
         .json({ message: error.message })
     }
-  })
+  }
 
-  server.get('/confirm/:code/', function confirm (req, res) {
+  async function confirm (req, res) {
     var code = req.params.code
 
     try {
@@ -43,15 +39,30 @@ function router (auth) {
         .status(400)
         .json({ message: error.message })
     }
-  })
+  }
 
-  server.post('/restore/', function restore (req, res) {
-    
-  })
+  async function restore (req, res) {
 
-  server.post('/reset/', function reset (req, res) {
+  }
 
-  })
+  async function reset (req, res) {
+
+  }
+
+  var server = express()
+
+  server.use(bodyParser.urlencoded())
+  server.use(bodyParser.json())
+
+  server.post('/sign-up/', signUp)
+
+  server.post('/sign-in/', )
+
+  server.get('/confirm/:code/', confirm)
+
+  server.post('/restore/', restore)
+
+  server.post('/reset/', reset)
 
   return server
 }
