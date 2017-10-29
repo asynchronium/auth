@@ -12,7 +12,7 @@ function router (auth) {
     var password = req.body.password
 
     try {
-      var result = await auth.signUp({ email, password })
+      var user = await auth.signUp({ email, password })
     } catch (error) {
       res
         .status(400)
@@ -25,7 +25,7 @@ function router (auth) {
     var password = req.body.password
 
     try {
-      var result = await auth.signIn({ email, password })
+      var user = await auth.signIn({ email, password })
     } catch (error) {
       res
         .status(401)
@@ -34,11 +34,19 @@ function router (auth) {
   })
 
   server.get('/confirm/:code/', function confirm (req, res) {
+    var code = req.params.code
 
+    try {
+      var user = await auth.confirm({ code })
+    } catch (error) {
+      res
+        .status(400)
+        .json({ message: error.message })
+    }
   })
 
   server.post('/restore/', function restore (req, res) {
-
+    
   })
 
   server.post('/reset/', function reset (req, res) {
