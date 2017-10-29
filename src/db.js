@@ -1,9 +1,9 @@
 var fs = require('fs')
 
 class DB {
-	constructor () {
+  constructor () {
 
-	}
+  }
 }
 
 module.exports = DB

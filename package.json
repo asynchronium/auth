@@ -23,9 +23,12 @@
   },
   "main": "bin/run.js",
   "devDependencies": {
+    "sinon": "^4.0.2",
     "snazzy": "7.0.0",
     "standard": "^10.0.3",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "tap-diff": "^0.1.1",
+    "tape": "^4.8.0"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
@@ -35,6 +38,7 @@
     "jsonwebtoken": "^8.1.0"
   },
   "scripts": {
-    "check": "standard bin/*.js src/*.js | snazzy"
+    "check": "standard bin/*.js src/*.js | snazzy",
+    "test": "tape tests/*.js"
   }
 }

@@ -16,7 +16,7 @@ class Auth {
 
     var hash = await bcrypt.hash(password, 10)
     this.mailer.send({ email, type: 'welcome' })
-    return db.createUser({ email, hash })
+    return this.db.createUser({ email, hash })
   }
 
   async signIn ({ email, password }) {
