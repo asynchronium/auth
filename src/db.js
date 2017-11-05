@@ -5,11 +5,11 @@ class DB {
 
   }
 
-  getUser ({ email, id }) {
+  getUser ({ id, email, code }) {
 
   }
 
-  createUser ({ email, password, code }) {
+  createUser ({ email, password }) {
 
   }
 

@@ -1,4 +1,8 @@
+var { promisify } = require('util')
+var crypto = require('crypto')
 var bcrypt = require('bcrypt')
+
+var randomBytesAsync = promisify(crypto.randomBytes)
 
 class Auth {
   constructor ({ db, logger, mailer }) {
@@ -12,8 +16,9 @@ class Auth {
 
     if (!user) {
       var hash = await bcrypt.hash(password, 10)
-      user = await this.db.createUser({ email, password: hash })
-      this.mailer.send({ email, type: 'welcome', { code: user.code }})
+      var code = await this.createVerificationCode()
+      user = await this.db.createUser({ email, password: hash, code })
+      this.mailer.send({ email, type: 'welcome', { code }})
       return user
     }
 
@@ -50,6 +55,11 @@ class Auth {
 
   async reset ({ id, password, newPassword }) {
 
+  }
+
+  async createVerificationCode () {
+    var buffer = await randomBytesAsync(32)
+    return buffer.toString('hex')
   }
 }
 
