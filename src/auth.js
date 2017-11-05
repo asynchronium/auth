@@ -15,8 +15,10 @@ class Auth {
     var user = await this.db.getUser({ email })
 
     if (!user) {
-      var hash = await bcrypt.hash(password, 10)
-      var code = await this.createVerificationCode()
+      var [hash, code] = Promise.all([
+        bcrypt.hash(password, 10),
+        this.createVerificationCode()
+      ])
       user = await this.db.createUser({ email, password: hash, code })
       this.mailer.send({ email, type: 'welcome', { code }})
       return user
